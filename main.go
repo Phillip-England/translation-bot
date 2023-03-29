@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -29,10 +28,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func main() {
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Failed to find .env file")
-	}
+	godotenv.Load()
 
 	r := gin.New()
 	r.Use(CORSMiddleware())
