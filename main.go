@@ -64,15 +64,29 @@ func main() {
 		err = json.Unmarshal(body, &message)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
 		}
 		text := message.Text
 
 		// checking if we are translating to spanish or english
-		toSpanish := strings.Contains(text, "#spanish")
-		toEnglish := strings.Contains(text, "#english")
-		var subString string
+		keyword := string(text[:8])
+		toSpanish := false
+		toEnglish := false
+		if keyword == "$spanish" {
+			toSpanish = true
+		}
+		if keyword == "$english" {
+			toEnglish = true
+		}
 
+		// if we dont get a keyword, exit
+		if !toSpanish && !toEnglish {
+			c.JSON(http.StatusBadRequest, gin.H{"message": "no keyword provided"})
+			return
+		}
+		
 		// grabbing substring (excluding the #spanish or #english from message translation)
+		var subString string
 		if toEnglish || toSpanish {
 			subString = string(text[9:])
 		}
