@@ -54,6 +54,8 @@ func main() {
 	// building route to handle all incoming groupme messages
 	r.POST("/", func(c *gin.Context) {
 
+		fmt.Println("Bot hit route")
+
 		// grabbing message from incoming groupme request
 		body, err := io.ReadAll(c.Request.Body)
 		if err != nil {
@@ -70,16 +72,15 @@ func main() {
 			return
 		}
 		text := message.Text
-		fmt.Println(message)
 
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
 		toSpanish := false
 		toEnglish := false
-		if keyword == "$spanish" || keyword == "$Spanish" {
+		if keyword == "$spanish" {
 			toSpanish = true
 		}
-		if keyword == "$ingles" || keyword == "$Ingles" {
+		if keyword == "$ingles" {
 			toEnglish = true
 		}
 
