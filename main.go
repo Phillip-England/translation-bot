@@ -56,8 +56,6 @@ func main() {
 	// building route to handle all incoming groupme messages
 	r.POST("/", func(c *gin.Context) {
 
-		fmt.Println("Bot hit route")
-
 		// grabbing message from incoming groupme request
 		body, err := io.ReadAll(c.Request.Body)
 		if err != nil {
@@ -74,6 +72,16 @@ func main() {
 			return
 		}
 		text := message.Text
+		groupID := message.GroupID
+
+		// setting up our bot ID based off the groupID
+		var groupmeBotID string
+		if groupID == "91127088" {
+			groupmeBotID = os.Getenv("TESTING_BOT_ID")
+		}
+		if groupID == "15570590" {
+			groupmeBotID = os.Getenv("SOUTHROADS_LEADERSHIP_BOT_ID")
+		}
 
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
@@ -151,7 +159,6 @@ func main() {
 		translatedText := translationResponse.Translations[0].Text
 
 		// setting up variables for groupme request
-		groupmeBotID := os.Getenv("GROUPME_BOT_ID")
 		groupmeRequestURL := "https://api.groupme.com/v3/bots/post"
 
 		// creating json body for groupme request
@@ -174,13 +181,13 @@ func main() {
 		req.Header.Set("Content-Type", "application/json")
 
 		// Make the request with an HTTP client
-		// client = &http.Client{}
-		// resp, err = client.Do(req)
-		// if err != nil {
-		// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		// 	return
-		// }
-		// defer resp.Body.Close()
+		client = &http.Client{}
+		resp, err = client.Do(req)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		defer resp.Body.Close()
 
 	})
 
