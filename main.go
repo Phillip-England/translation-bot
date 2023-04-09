@@ -87,10 +87,10 @@ func main() {
 		keyword := string(text[:8])
 		toSpanish := false
 		toEnglish := false
-		if keyword == "$spanish" {
+		if keyword == "$spanish" || keyword == "$Spanish" {
 			toSpanish = true
 		}
-		if keyword == "$ingles" {
+		if keyword == "$ingles" || keyword == "$Ingles" {
 			toEnglish = true
 		}
 
