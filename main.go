@@ -51,6 +51,8 @@ func main() {
 	r := gin.New()
 	r.Use(CORSMiddleware())
 
+	fmt.Println("Testing printing")
+
 	// building route to handle all incoming groupme messages
 	r.POST("/", func(c *gin.Context) {
 
