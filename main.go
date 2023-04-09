@@ -60,6 +60,8 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
 
+		fmt.Println(string(body))
+
 		// unwrapping message and getting raw text
 		var message Message
 		err = json.Unmarshal(body, &message)
