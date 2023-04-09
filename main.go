@@ -14,19 +14,20 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type Message struct { 
+type Message struct {
 	Text string `json:"text"`
+	GroupID string `json:"group_id"`
 }
 
 type TranslationResponse struct {
 	Translations []struct {
-			DetectedSourceLanguage string `json:"detected_source_language"`
-			Text                   string `json:"text"`
+		DetectedSourceLanguage string `json:"detected_source_language"`
+		Text                   string `json:"text"`
 	} `json:"translations"`
 }
 
 type GroupmeRequestBody struct {
-	Text string `json:"text"`
+	Text  string `json:"text"`
 	BotID string `json:"bot_id"`
 }
 
@@ -67,15 +68,16 @@ func main() {
 			return
 		}
 		text := message.Text
+		fmt.Println(message)
 
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
 		toSpanish := false
 		toEnglish := false
-		if keyword == "$spanish" {
+		if keyword == "$spanish" || keyword == "$Spanish" {
 			toSpanish = true
 		}
-		if keyword == "$ingles" {
+		if keyword == "$ingles" || keyword == "$Ingles" {
 			toEnglish = true
 		}
 
@@ -84,7 +86,7 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "no keyword provided"})
 			return
 		}
-		
+
 		// grabbing substring (excluding the #spanish or #english from message translation)
 		var subString string
 		if toEnglish || toSpanish {
@@ -103,7 +105,7 @@ func main() {
 		apiurl := "https://api-free.deepl.com/"
 		resource := "/v2/translate"
 		data := url.Values{
-			"text": {subString},
+			"text":        {subString},
 			"target_lang": {targetLanguage},
 		}
 		u, _ := url.ParseRequestURI(apiurl)
@@ -116,7 +118,7 @@ func main() {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		
+
 		// setting headers
 		key := os.Getenv("API_KEY")
 		authHeader := fmt.Sprintf("DeepL-Auth-Key %s", key)
@@ -146,11 +148,11 @@ func main() {
 		// setting up variables for groupme request
 		groupmeBotID := os.Getenv("GROUPME_BOT_ID")
 		groupmeRequestURL := "https://api.groupme.com/v3/bots/post"
-		
+
 		// creating json body for groupme request
 		groupmeRequestBody := GroupmeRequestBody{
-			Text: translatedText,
-			BotID: groupmeBotID, 
+			Text:  translatedText,
+			BotID: groupmeBotID,
 		}
 		requestBody, err := json.Marshal(groupmeRequestBody)
 		if err != nil {
@@ -160,20 +162,20 @@ func main() {
 
 		// creating http request to post groupme message
 		req, err = http.NewRequest("POST", groupmeRequestURL, bytes.NewBuffer(requestBody))
-    if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-      return
-    }
-    req.Header.Set("Content-Type", "application/json")
-
-		// Make the request with an HTTP client
-		client = &http.Client{}
-		resp, err = client.Do(req)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-      return
+			return
 		}
-		defer resp.Body.Close()
+		req.Header.Set("Content-Type", "application/json")
+
+		// Make the request with an HTTP client
+		// client = &http.Client{}
+		// resp, err = client.Do(req)
+		// if err != nil {
+		// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		// 	return
+		// }
+		// defer resp.Body.Close()
 
 	})
 
