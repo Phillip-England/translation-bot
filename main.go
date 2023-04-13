@@ -80,6 +80,9 @@ func main() {
 		if groupID == "15570590" {
 			groupmeBotID = os.Getenv("SOUTHROADS_LEADERSHIP_BOT_ID")
 		}
+		if groupID == "63643913" {
+			groupmeBotID = os.Getenv("KITCHEN_LEADERSHIP_BOT_ID")
+		}
 
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
