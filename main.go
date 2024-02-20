@@ -91,7 +91,7 @@ func main() {
 		if keyword == "$spanish" || keyword == "$Spanish" {
 			toSpanish = true
 		}
-		if keyword == "$ingles" || keyword == "$Ingles" {
+		if keyword == "$ingles " || keyword == "$Ingles " {
 			toEnglish = true
 		}
 
