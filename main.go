@@ -83,6 +83,12 @@ func main() {
 		if groupID == "63643913" {
 			groupmeBotID = os.Getenv("KITCHEN_LEADERSHIP_BOT_ID")
 		}
+		if groupID == "88399719" {
+			groupmeBotID = os.Getenv("FOH_OPERATIONS_BOT_ID")
+		}
+		if groupID == "94086071" {
+			groupmeBotID = os.Getenv("SUPPLY_ORDER_BOT_ID")
+		}
 
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
@@ -158,6 +164,7 @@ func main() {
 
 		// Access the translation text
 		translatedText := translationResponse.Translations[0].Text
+		fmt.Println(translatedText)
 
 		// setting up variables for groupme request
 		groupmeRequestURL := "https://api.groupme.com/v3/bots/post"
