@@ -1,6 +1,6 @@
 # translation-bot
 
-Does your team use groupme? Are you constantly having to use google translate to ensure everyone on your team can read message? Introducing: translation-bot! A quick and easy way to auto-translate groupme messages using deepl.com's translation API.
+Does your team use groupme? Are you constantly having to use google translate to ensure everyone on your team can read messages? Introducing: translation-bot! A quick and easy way to auto-translate groupme messages using deepl.com's translation API.
 
 ## Usage
 
