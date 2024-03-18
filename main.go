@@ -60,8 +60,6 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
 
-		fmt.Println(string(body))
-
 		// unwrapping message and getting raw text
 		var message Message
 		err = json.Unmarshal(body, &message)
@@ -74,19 +72,19 @@ func main() {
 
 		// setting up our bot ID based off the groupID
 		var groupmeBotID string
-		if groupID == "91127088" {
+		if groupID == os.Getenv("TESTING_GROUP_ID") {
 			groupmeBotID = os.Getenv("TESTING_BOT_ID")
 		}
-		if groupID == "15570590" {
+		if groupID == os.Getenv("SOUTHROADS_LEADERSHIP_GROUP_ID") {
 			groupmeBotID = os.Getenv("SOUTHROADS_LEADERSHIP_BOT_ID")
 		}
-		if groupID == "63643913" {
+		if groupID == os.Getenv("KITCHEN_LEADERSHIP_GROUP_ID") {
 			groupmeBotID = os.Getenv("KITCHEN_LEADERSHIP_BOT_ID")
 		}
-		if groupID == "88399719" {
+		if groupID == os.Getenv("FOH_OPERATIONS_GROUP_ID") {
 			groupmeBotID = os.Getenv("FOH_OPERATIONS_BOT_ID")
 		}
-		if groupID == "94086071" {
+		if groupID == os.Getenv("SUPPLY_ORDER_GROUP_ID") {
 			groupmeBotID = os.Getenv("SUPPLY_ORDER_BOT_ID")
 		}
 
@@ -140,7 +138,7 @@ func main() {
 		}
 
 		// setting headers
-		key := os.Getenv("API_KEY")
+		key := os.Getenv("DEEPL_API_KEY")
 		authHeader := fmt.Sprintf("DeepL-Auth-Key %s", key)
 		req.Header.Set("Authorization", authHeader)
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -164,7 +162,6 @@ func main() {
 
 		// Access the translation text
 		translatedText := translationResponse.Translations[0].Text
-		fmt.Println(translatedText)
 
 		// setting up variables for groupme request
 		groupmeRequestURL := "https://api.groupme.com/v3/bots/post"
