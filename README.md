@@ -14,13 +14,19 @@ translation-bot enables your groupme memeber to auto-translate their messages by
 git clone https://github.com/phillip-england/translation-bot <target-directory>
 ```
 
-2. Create a .env in the root of the project
+2. Install Go Packages
+
+```bash
+go mod tidy
+```
+
+3. Create a .env in the root of the project
 
 ```bash
 touch .env
 ```
 
-3. Add the required environment varialbes to .env
+4. Add the required environment varialbes to .env
 
 ```bash
 DEEPL_API_KEY=your deepl.com api key for translation (they offer a free tier)
@@ -29,7 +35,7 @@ YOUR_BOT_ID=your groupme bot ID (more on this in next section)
 YOUR_GROUP_ID=your groupme group ID (more on this in next section)
 ```
 
-4. Modify the following section in main.go to fit your requirements. In my case, I am using this bot on multiple different groupme channels.
+5. Modify the following section in main.go to fit your requirements. In my case, I am using this bot on multiple different groupme channels.
 
 ```go
 var groupmeBotID string
@@ -61,10 +67,16 @@ if groupID == os.Getenv("YOUR_GROUP_ID") {
 
 Simply add more .env varialbes to add additional groups your bot can post to.
 
+6. Serve the Application
+
+```bash
+go run main.go
+```
+
 ## Third-Party Documentation
 
 For more information on how to use the groupme api or the deepl translation api, check the following links:
 
-[Groupme API](https://dev.groupme.com/)
-[Deepl API](https://www.deepl.com/translator) 
+- [Groupme API](https://dev.groupme.com/)
+- [Deepl API](https://www.deepl.com/translator) 
 
