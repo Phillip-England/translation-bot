@@ -28,7 +28,7 @@ touch .env
 
 4. Add the required environment varialbes to .env
 
-```bash
+```text
 DEEPL_API_KEY=your deepl.com api key for translation (they offer a free tier)
 PORT=port to serve on
 YOUR_BOT_ID=your groupme bot ID (more on this in next section)
