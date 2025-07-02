@@ -72,22 +72,42 @@ func main() {
 
 		// setting up our bot ID based off the groupID
 		var groupmeBotID string
-		if groupID == os.Getenv("TESTING_GROUP_ID") {
-			groupmeBotID = os.Getenv("TESTING_BOT_ID")
-		}
+
+		// SOUTHROADS LEADERSHIP (X)
 		if groupID == os.Getenv("SOUTHROADS_LEADERSHIP_GROUP_ID") {
 			groupmeBotID = os.Getenv("SOUTHROADS_LEADERSHIP_BOT_ID")
 		}
-		if groupID == os.Getenv("KITCHEN_LEADERSHIP_GROUP_ID") {
-			groupmeBotID = os.Getenv("KITCHEN_LEADERSHIP_BOT_ID")
-		}
-		if groupID == os.Getenv("FOH_OPERATIONS_GROUP_ID") {
-			groupmeBotID = os.Getenv("FOH_OPERATIONS_BOT_ID")
-		}
-		if groupID == os.Getenv("SUPPLY_ORDER_GROUP_ID") {
-			groupmeBotID = os.Getenv("SUPPLY_ORDER_BOT_ID")
+
+		// SOUTHRODS AMAZON/SUPPLY CENTRAL
+		if groupID == os.Getenv("SOUTHROADS_SUPPLY_ORDER_GROUP_ID") {
+			groupmeBotID = os.Getenv("SOUTHROADS_SUPPLY_ORDER_BOT_ID")
 		}
 
+		// UTICA KITCHEN LEADERSHIP
+		if groupID == os.Getenv("UTICA_KITCHEN_LEADERSHIP_GROUP_ID") {
+			groupmeBotID = os.Getenv("UTICA_KITCHEN_LEADERSHIP_BOT_ID")
+		}
+
+		// SOUTHROADS KITCHEN LEADERSHIP
+		if groupID == os.Getenv("SOUTHROADS_KITCHEN_LEADERSHIP_GROUP_ID") {
+			groupmeBotID = os.Getenv("SOUTHROADS_KITCHEN_LEADERSHIP_BOT_ID")
+		}
+
+		// UTICA FOH LEADERSHIP
+		if groupID == os.Getenv("UTICA_FOH_LEADERSHIP_GROUP_ID") {
+			groupmeBotID = os.Getenv("UTICA_FOH_LEADERSHIP_BOT_ID")
+		}
+
+		// UTICA SUPPLY ORDER
+		if groupID == os.Getenv("UTICA_SUPPLY_ORDER_GROUP_ID") {
+			groupmeBotID = os.Getenv("UTICA_SUPPLY_ORDER_BOT_ID")
+		}
+
+		// UTICA REPAIRS
+		if groupID == os.Getenv("UTICA_REPAIRS_GROUP_ID") {
+			groupmeBotID = os.Getenv("UTICA_REPAIRS_BOT_ID")
+		}
+	
 		// checking if we are translating to spanish or english
 		keyword := string(text[:8])
 		toSpanish := false
