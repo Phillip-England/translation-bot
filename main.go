@@ -73,7 +73,7 @@ func main() {
 		// setting up our bot ID based off the groupID
 		var groupmeBotID string
 
-		// SOUTHROADS LEADERSHIP (X)
+		// SOUTHROADS LEADERSHIP
 		if groupID == os.Getenv("SOUTHROADS_LEADERSHIP_GROUP_ID") {
 			groupmeBotID = os.Getenv("SOUTHROADS_LEADERSHIP_BOT_ID")
 		}
@@ -106,6 +106,11 @@ func main() {
 		// UTICA REPAIRS
 		if groupID == os.Getenv("UTICA_REPAIRS_GROUP_ID") {
 			groupmeBotID = os.Getenv("UTICA_REPAIRS_BOT_ID")
+		}
+
+		// SOUTHROADS TRAINING
+		if groupID == os.Getenv("SOUTHROADS_TRAINING_GROUP_ID") {
+			groupmeBotID = os.Getenv("SOUTHROADS_TRAINING_BOT_ID")
 		}
 	
 		// checking if we are translating to spanish or english
